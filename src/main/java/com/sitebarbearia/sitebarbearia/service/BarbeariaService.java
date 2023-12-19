@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface BarbeariaService {
     Barbearia cadastrarBarbearia (Barbearia barbearia);
     Optional<Barbearia> buscarBarbeariaPorEmail (String email);
+
+    Boolean autenticarBarbearia(String email, String senha);
 }

@@ -19,19 +19,23 @@ public class CadastroController {
     private BarbeariaService barbeariaService;
 
     @PostMapping("/cadastro-cliente")
-    public ResponseEntity<Cliente> cadastrarCliente (@RequestBody Cliente cliente) {
-        Cliente novoCliente = clienteService.cadastrarCliente(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
-    }
+    public ResponseEntity<Object> cadastrarCliente (@RequestBody Cliente cliente) {
+        try {
+            Cliente novoCliente = clienteService.cadastrarCliente(cliente);
+            return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
+        }catch (RuntimeException error) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(error.getMessage());
+        }
 
-    @GetMapping("/teste")
-    public ResponseEntity<String> teste() {
-        return ResponseEntity.ok("Teste bem-sucedido");
     }
 
     @PostMapping("/cadastro-barbearia")
-    public ResponseEntity<Barbearia> cadastrarBarbearia (@RequestBody Barbearia barbearia) {
-        Barbearia novaBarbearia = barbeariaService.cadastrarBarbearia(barbearia);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novaBarbearia);
+    public ResponseEntity<Object> cadastrarBarbearia (@RequestBody Barbearia barbearia) {
+        try {
+            Barbearia novaBarbearia = barbeariaService.cadastrarBarbearia(barbearia);
+            return ResponseEntity.status(HttpStatus.CREATED).body(novaBarbearia);
+        }catch (RuntimeException error) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(error.getMessage());
+        }
     }
 }
