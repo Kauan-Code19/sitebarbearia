@@ -47,8 +47,15 @@ public class BarbeariaServiceImpl implements BarbeariaService {
             barbearia.setContato(barbeariaAtualizada.getContato());
 
             return barbeariaRepository.save(barbearia);
-        }else {
-            throw new RuntimeException("Barbearia não encontrada");
-        }
+        } else throw new RuntimeException("Barbearia não encontrada");
+    }
+
+    @Override
+    public void excluirBarbearia(Long barbeariaID) {
+        Optional<Barbearia> barbeariaExistente = barbeariaRepository.findById(barbeariaID);
+
+        if (barbeariaExistente.isPresent()) {
+            barbeariaRepository.deleteById(barbeariaID);
+        } else throw new RuntimeException("Barbearia não encontrada");
     }
 }

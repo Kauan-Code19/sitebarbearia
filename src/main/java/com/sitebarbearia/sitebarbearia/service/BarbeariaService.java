@@ -8,4 +8,5 @@ public interface BarbeariaService {
     Optional<Barbearia> buscarBarbeariaPorEmail (String email);
     Boolean autenticarBarbearia (String email, String senha);
     Barbearia atualizarBarbearia (Barbearia barbeariaAtualizada);
+    void excluirBarbearia (Long barbeariaID);
 }

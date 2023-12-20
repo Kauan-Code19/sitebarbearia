@@ -50,4 +50,13 @@ public class ClienteServiceImpl implements ClienteService {
             throw new RuntimeException("Cliente não encontrado");
         }
     }
+
+    @Override
+    public void excluirCliente(Long clienteId) {
+        Optional<Cliente> clienteExistente = clienteRepository.findById(clienteId);
+
+        if (clienteExistente.isPresent()) {
+            clienteRepository.deleteById(clienteId);
+        } else throw new RuntimeException("Cliente não encontrado");
+    }
 }

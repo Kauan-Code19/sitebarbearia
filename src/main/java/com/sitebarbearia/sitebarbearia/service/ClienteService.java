@@ -8,4 +8,5 @@ public interface ClienteService {
     Optional<Cliente> buscarClientePorEmail (String email);
     Boolean autenticarCliente(String email, String senha);
     Cliente atualizarCliente (Cliente clienteAtualizado);
+    void excluirCliente (Long clienteId);
 }
