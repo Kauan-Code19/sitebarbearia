@@ -26,7 +26,6 @@ public class CadastroController {
         }catch (RuntimeException error) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(error.getMessage());
         }
-
     }
 
     @PostMapping("/cadastro-barbearia")

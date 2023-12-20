@@ -5,7 +5,6 @@ import com.sitebarbearia.sitebarbearia.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,7 +32,22 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteExistente.isPresent() && clienteExistente.get().getSenha().equals(senha);
     }
 
-    public List<Cliente> obterTodosClientes() {
-        return clienteRepository.findAll();
+    @Override
+    public Cliente atualizarCliente(Cliente clienteAtualizado) {
+        Long clienteID = clienteAtualizado.getClienteID();
+
+        Optional<Cliente> clienteExistente = clienteRepository.findById(clienteID);
+
+        if (clienteExistente.isPresent()) {
+            Cliente cliente = clienteExistente.get();
+            cliente.setNome(clienteAtualizado.getNome());
+            cliente.setEmail(clienteAtualizado.getEmail());
+            cliente.setSenha(clienteAtualizado.getSenha());
+            cliente.setEndereco(clienteAtualizado.getEndereco());
+
+            return clienteRepository.save(cliente);
+        }else {
+            throw new RuntimeException("Cliente não encontrado");
+        }
     }
 }
